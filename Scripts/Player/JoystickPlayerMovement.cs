@@ -5,18 +5,25 @@ using UnityEngine;
 public class JoystickPlayerMovement : MonoBehaviour
 {
     public float speed = 5f;
-    public VariableJoystick variableJoystick;
+    public MovementJoystick MovmentJoystick;
     public Rigidbody rb;
 
-    public void FixedUpdate()
+
+    private void Start()
     {
-        float horizontal = variableJoystick.Horizontal;
-        float vertical = variableJoystick.Vertical;
+        rb = GetComponent<Rigidbody>();
+    }
+    public void Update()
+    {
+        Vector2 input = MovmentJoystick.InputVector;
 
-        Vector3 direction = new Vector3(horizontal, 0, vertical);
+        Vector3 moveDirection = new Vector3(input.x, 0, input.y);
+        rb.velocity = moveDirection * speed;
 
-        rb.velocity = direction * speed;
-        Debug.Log($"Horizontal: {horizontal}, Vertical: {vertical}");
+        if (moveDirection != Vector3.zero)
+        {
+            transform.rotation = Quaternion.LookRotation(moveDirection);
+        }
     }
 }
 

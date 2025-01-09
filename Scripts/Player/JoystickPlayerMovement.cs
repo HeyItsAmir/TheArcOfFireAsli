@@ -18,7 +18,7 @@ public class JoystickPlayerMovement : MonoBehaviour
         Vector2 input = MovmentJoystick.InputVector;
 
         Vector3 moveDirection = new Vector3(input.x, 0, input.y);
-        rb.velocity = moveDirection * speed;
+        rb.linearVelocity = moveDirection * speed;
 
         if (moveDirection != Vector3.zero)
         {

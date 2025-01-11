@@ -18,11 +18,13 @@ public class JoystickPlayerMovement : MonoBehaviour
         Vector2 input = MovmentJoystick.InputVector;
 
         Vector3 moveDirection = new Vector3(input.x, 0, input.y);
-        rb.linearVelocity = moveDirection * speed;
+        Vector3 targetPosition = rb.position + moveDirection * speed * Time.fixedDeltaTime;
+        rb.MovePosition(targetPosition);
 
         if (moveDirection != Vector3.zero)
         {
             transform.rotation = Quaternion.LookRotation(moveDirection);
+            rb.MovePosition(targetPosition);
         }
     }
 }

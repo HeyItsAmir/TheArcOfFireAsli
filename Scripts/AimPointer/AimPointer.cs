@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class AimPointer : MonoBehaviour
@@ -8,6 +9,8 @@ public class AimPointer : MonoBehaviour
     public GameObject AimPointerObject;
     public Transform player;
     public float AimDistance = 10f;
+    public Animator animator;
+    public Vector3 lastDirection;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,14 +21,17 @@ public class AimPointer : MonoBehaviour
     void Update()
     {
         Vector2 input = Rotationjoystick.InputVector;
-        if  (Rotationjoystick.InputVector != Vector2.zero)
+        if  (input != Vector2.zero)
         {
             if (!AimPointerObject.activeSelf)
             {
                 AimPointerObject.SetActive(true);
                 print("AimObject now enable");
             }
+
+
             Vector3 AimDirection = new Vector3(input.x, 0, input.y).normalized;
+            lastDirection = AimDirection;
             Vector3 targePosition = player.position + AimDirection * AimDistance;
 
             AimPointerObject.transform.position = targePosition;
@@ -38,7 +44,17 @@ public class AimPointer : MonoBehaviour
             {
                 AimPointerObject.SetActive(false);
                 print("AimObject now disable");
+
+                float horizontalValue = CalculateHorizontalValue(lastDirection);
+                Debug.Log($"Horizontal Value: {horizontalValue}");
+                animator.SetFloat("AimingFloat", horizontalValue);
             }
         }
+    }
+    private float CalculateHorizontalValue(Vector3 AimDirection)
+    {
+        Vector3 playerRight = player.right;
+        float horizontalValue = Vector3.Dot(AimDirection, playerRight);
+        return Mathf.Clamp(horizontalValue, -1, -1);
     }
 }

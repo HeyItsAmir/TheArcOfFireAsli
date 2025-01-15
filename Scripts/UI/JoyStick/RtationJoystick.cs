@@ -37,12 +37,12 @@ public class RotationJoystick : MonoBehaviour, IDragHandler, IPointerUpHandler, 
     {
         inputVector = Vector2.zero;
         joystickHandle.anchoredPosition = Vector2.zero;
-        Debug.Log("Shoot");
+        Debug.Log("Shoot");      
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
         Debug.Log("Joystick Pressed");
-        OnDrag(eventData);
+        OnDrag(eventData);       
     }
 }

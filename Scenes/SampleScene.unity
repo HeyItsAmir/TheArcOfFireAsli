@@ -1518,6 +1518,20 @@ MonoBehaviour:
   corpse: {fileID: 1333085391}
   corpseCarryArea: {fileID: 241328782}
   corpseDropArea: {fileID: 681808742}
+--- !u!114 &231707783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 231707768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c11d686b104ce5944bb36b70091321ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 231707777}
+  RightJoystick: {fileID: 1117626224}
 --- !u!1 &241328781
 GameObject:
   m_ObjectHideFlags: 0
@@ -6437,6 +6451,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 231707782}
+    - targetCorrespondingSourceObject: {fileID: 4132312772176831909, guid: 64b182395c0b6744a920c74bce3ece13,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 231707783}
   m_SourcePrefab: {fileID: 100100000, guid: 64b182395c0b6744a920c74bce3ece13, type: 3}
 --- !u!4 &1421084125 stripped
 Transform:

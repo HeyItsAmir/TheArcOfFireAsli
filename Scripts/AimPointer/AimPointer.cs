@@ -10,7 +10,7 @@ public class AimPointer : MonoBehaviour
     public Transform player;
     public float AimDistance = 10f;
     public Animator animator;
-    public Vector3 lastDirection;
+    //public Vector3 lastDirection;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,23 +31,32 @@ public class AimPointer : MonoBehaviour
 
 
             Vector3 AimDirection = new Vector3(input.x, 0, input.y).normalized;
-            lastDirection = AimDirection;
+            //lastDirection = AimDirection;
             Vector3 targePosition = player.position + AimDirection * AimDistance;
 
             AimPointerObject.transform.position = targePosition;
 
             AimPointerObject.transform.rotation = Quaternion.LookRotation(AimDirection);
+
+            Vector3 playerForward = player.forward;
+            // ADRTP = Aim Direction Relative To The Player
+            Vector3 ADRTP = (targePosition - player.position).normalized;
+
+            float   RealtiveAngle = Vector3.SignedAngle(playerForward, ADRTP, Vector3.up);
+            float normalizedAngle = Mathf.Clamp(RealtiveAngle/ 90f, -1f, 1f);
+            animator.SetFloat("AimingFloat", normalizedAngle);
+
         }
         else
         {
             if (AimPointerObject.activeSelf)
             {
                 AimPointerObject.SetActive(false);
-                print("AimObject now disable");
+                //print("AimObject now disable");
 
-                float horizontalValue = CalculateHorizontalValue(lastDirection);
-                Debug.Log($"Horizontal Value: {horizontalValue}");
-                animator.SetFloat("AimingFloat", horizontalValue);
+                //float horizontalValue = CalculateHorizontalValue(lastDirection);
+                //Debug.Log($"Horizontal Value: {horizontalValue}");
+                //animator.SetFloat("AimingFloat", horizontalValue);
             }
         }
     }

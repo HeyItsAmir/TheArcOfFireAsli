@@ -8,7 +8,7 @@ public class RotationJoystick : MonoBehaviour, IDragHandler, IPointerUpHandler, 
     public RectTransform joystickBackground;
     public RectTransform joystickHandle;
     private Vector2 inputVector;
-
+    public bool RightJoystickReleased;
     public Vector2 InputVector => inputVector;
 
     public void OnDrag(PointerEventData eventData)
@@ -38,11 +38,13 @@ public class RotationJoystick : MonoBehaviour, IDragHandler, IPointerUpHandler, 
         inputVector = Vector2.zero;
         joystickHandle.anchoredPosition = Vector2.zero;
         Debug.Log("Shoot");      
+        RightJoystickReleased = true;
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
         Debug.Log("Joystick Pressed");
         OnDrag(eventData);       
+        RightJoystickReleased = false;
     }
 }
